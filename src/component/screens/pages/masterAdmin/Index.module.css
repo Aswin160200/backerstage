@@ -1,0 +1,102 @@
+.MasterAdminMainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: var(--backgroundcolor);
+
+}
+.MasterAdmin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.MasterAdminNavCantainer{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    align-items: center;
+    padding: 0.5rem;
+}
+.MasterAdminNavImageAndTextContent{
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.MasterAdminNavText{
+    font-family: var(--defaultFontFamily);
+    font-size: var(--font-size_20);
+    font-weight: var(--font-weight_600);
+}
+.MasterAdminNavButtonContent{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 25%;
+}
+.MasterAdminNavexportButton{
+    padding: 0.5rem 1.5rem;
+    margin: 0rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--lightRed);
+    background-color: var(--lightRed);
+    font-family: var(--defaultFontFamily);
+    font-size: var(--font-size_16);
+    font-weight: var(--font-weight_500);
+    color: var(--whitecolor);
+    cursor: pointer;
+}
+.MasterAdminNavAddUserButton{
+    padding: 0.5rem 1.5rem;
+    margin: 0rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--lightBlueColor);
+    background-color: var(--lightBlueColor);
+    font-family: var(--defaultFontFamily);
+    font-size: var(--font-size_16);
+    font-weight: var(--font-weight_500);
+    color: var(--whitecolor);
+    cursor: pointer;
+}
+.MasterAdminActionContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.MasterAdminActionEditIcon{
+    width: 10%;
+    height: 10%;
+    color: var(--geenColor);
+    cursor: pointer;
+}
+.MasterAdminActionViewIcon{
+    width: 10%;
+    height: 10%;
+    color: var(--purpleColor);
+    cursor: pointer;
+}
+.MasterAdminActionDeleteIcon{
+    width: 10%;
+    height: 10%;
+    color: var(--lightRed);
+    cursor: pointer;
+}
+.MasterAdminTabsContainerTable{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 1rem;
+    background-color: var(--whitecolor);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 8px 4px var(--boxShadow);
+}
+.MasterAdminTablePagination{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+}

@@ -1,0 +1,153 @@
+:root{
+   /* color */
+   --backgroundcolor : #f0f0f0;
+   --whitecolor : #fff;
+   --darkColor : #000;
+   --blueColor: #1d0086;
+   --redColor: #ff0505;
+   --darkBlue: #0c2138;
+   --ashColor: #dfdfdf;
+   --lightBlueColor: #2f8cff;
+   --darkBlueColor:#172b4c;
+   --darkAshColor:#686e8c;
+   --geenColor: #66f36d;
+   --darkGreenColor: #10a718;
+   --purpleColor:#c35cec;
+   --lightRed:#f04646;
+   --boxShadow : rgb(230, 228, 228);
+   --tableBorderColor:#dbd9d9;
+   --DartPurpleColor:#701594;
+
+   /* font family */
+   --defaultFontFamily :"Quicksand", serif;
+
+
+   /* size */
+   --font-size_10: 10px;
+   --font-size_12: 12px;
+   --font-size_14: 14px;
+   --font-size_16: 16px;
+   --font-size_18: 18px;
+   --font-size_20: 20px;
+   --font-size_22: 22px;
+   --font-size_24: 24px;
+   --font-size_26: 26px;
+   --font-size_28: 28px;
+   --font-size_30: 30px;
+   --font-size_32: 32px;
+   --font-size_34: 34px;
+   --font-size_36: 36px;
+   --font-size_38: 38px;
+   --font-size_40: 40px; 
+   --font-size_42: 42px;
+   --font-size_44: 44px;
+   --font-size_46: 46px;
+   --font-size_48: 48px;
+   --font-size_50: 50px;
+
+   /* bold */
+
+  --font-weight_100: 100;
+  --font-weight_200: 200;
+  --font-weight_300: 300;
+  --font-weight_400: 400;
+  --font-weight_500: 500;
+  --font-weight_600: 600;
+  --font-weight_700: 700;
+  --font-weight_800: 800;
+  --font-weight_900: 900 ;
+}
+
+.Link{
+  text-decoration: none !important;
+  color: unset !important;
+}
+
+.LinkCard{
+  text-decoration: none !important;
+  color: unset !important;
+  width: 50%;
+}
+
+/* table */
+
+input {
+  width: 40%;
+  min-width: 200px;
+  border-radius: 10px;
+  border: 2px solid #686e8c;
+  padding: 10px;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  padding: 1rem;
+  margin: 20px 0;
+  border-collapse: collapse;
+  font-family: var(--defaultFontFamily);
+}
+
+thead {
+  background-color: #e6f0f3;
+  font-size: 16px;
+  
+}
+
+th {
+  text-align: left;
+  padding: 0.5rem;
+  background-color: 1px solid #ffffff;
+  color: #686e8c;
+}
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--tableBorderColor);
+
+}
+
+tr {
+  height: 50px;
+}
+
+/* select box */
+.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border-color: rgb(166, 167, 172) !important; 
+}
+
+
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 60vh;
+  background-color: var(--whitecolor);
+  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+@media (max-width: 1024px) {
+  .modal {
+    width: 90%;
+    height: 70vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 95%;
+    height: 80vh;
+    padding: 12px;
+  }
+}
+
+
+.css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+ padding: 0.4rem !important;
+}

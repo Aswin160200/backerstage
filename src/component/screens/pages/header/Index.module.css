@@ -1,0 +1,23 @@
+.HeaderPageMainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    background-color: var(--whitecolor);
+}
+.HeaderPageNavContainer{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+.HeaderPageLogo{
+    width: 15%;
+}
+.HeaderPageNavContainerLeft{
+    display: flex;
+    width: 100%;
+}
+.HeaderPageNavContainerRight{
+    display: flex;
+    width: 35%;
+}
