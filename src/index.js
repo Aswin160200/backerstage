@@ -26,7 +26,6 @@ import Subscriptions from './component/screens/pages/superAdmin/subscriptions/In
 import SubscriptionDetails from './component/screens/pages/superAdmin/subscriptions/subscriptionDetails/Index.js';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AppProvider>
