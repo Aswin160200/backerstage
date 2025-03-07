@@ -28,19 +28,22 @@ import DcoumentsPage from "./Documents/Index";
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import PartiesImage from "../../../../assets/images/PartiesImage.png";
 import NotesImage from "../../../../assets/images/NotesImage.png";
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import { InputAdornment } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 800,
-    height: "60vh",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-    borderRadius: "10px",
-    overflowY: "scroll",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,  
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  borderRadius: "10px",
   }
 
   const styleViewInvestorTable = {
@@ -58,7 +61,6 @@ const style = {
   & .MuiOutlinedInput-root {
     border-color: rgb(166, 167, 172);
     color: rgb(13, 13, 14);
-    height: 46px;
     font-size: 14px;
 
     & fieldset {
@@ -79,6 +81,31 @@ const style = {
     }
   }
 `;
+
+export const SelectStyled = styled(Select)`
+  & .MuiOutlinedInput-root {
+    height: 44px;
+    font-size: 14px;
+    color: rgb(13, 13, 14);
+    border-radius: 6px;
+    transition: border-color 0.2s ease-in-out; 
+
+    & fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &:hover fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &.Mui-disabled fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+  }
+`;
+
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -120,6 +147,12 @@ const ProjectDetails = () => {
     setValue(newValue);
   };
 
+  const [role, setRole] = useState("10");
+
+const handleChangeRole = (event) => {
+  setRole(event.target.value);
+};
+
   //   add Party's Project start
   const [openPartysProject, setOpenPartysProject] = useState(false);
   const handleOpenPartysProject = () => setOpenPartysProject(true);
@@ -132,9 +165,44 @@ const ProjectDetails = () => {
 const [openInvestorDocument, setOpenInvestorDocument] = useState(false);
 const handleOpenInvestorDocument = () => setOpenInvestorDocument(true);
 const handleCloseInvestorDocument = () => setOpenInvestorDocument(false);
-
- 
 //   Add Investor Docuents end
+
+//   Add New Distribution start
+const [openNewDistribution, setOpenNewDistribution] = useState(false);
+const handleOpenNewDistribution = () => setOpenNewDistribution(true);
+const handleCloseNewDistribution = () => setOpenNewDistribution(false);
+//   Add New Distribution end
+
+//   Add New Project Cost start
+const [openNewProjectCost, setOpenNewProjectCost] = useState(false);
+const handleOpenNewProjectCost = () => setOpenNewProjectCost(true);
+const handleCloseNewProjectCost = () => setOpenNewProjectCost(false);
+//   Add New Distribution end
+
+//   Generated Docs start
+const [openGeneratedView, setOpenGeneratedView] = useState(false);
+const handleOpenGeneratedView = () => setOpenGeneratedView(true);
+const handleCloseGeneratedView = () => setOpenGeneratedView(false);
+//   Generated Docs end
+
+
+//   Investor View start
+const [openInvestorView, setOpenInvestorView] = useState(false);
+const handleOpenInvestorView = () => setOpenInvestorView(true);
+const handleCloseInvestorView = () => setOpenInvestorView(false);
+//   Investor Viww end
+
+//   Investor Edit start
+const [openInvestorEdit, setOpenInvestorEdit] = useState(false);
+const handleOpenInvestorEdit = () => setOpenInvestorEdit(true);
+const handleCloseInvestorEdit = () => setOpenInvestorEdit(false);
+//   Investor Edit end
+
+//   Notes start
+const [openNotesDoc, setOpenNotesDoc] = useState(false);
+const handleOpenNotesDoc = () => setOpenNotesDoc(true);
+const handleCloseNotesDoc = () => setOpenNotesDoc(false);
+//   Notes end
 
 //   View Investor Docuents start
 const [openViewInvestorDocument, setOpenViewInvestorDocument] = useState(false);
@@ -155,18 +223,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
       finalAmount: "$50,974",
       status: "SPV",
       action: (
-        <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
+        <div className="TableActionContainer">
+          <EditOutlinedIcon className="TableActionEditIcon"  onClick={()=> handleOpenInvestorEdit()}/>
           <RemoveRedEyeOutlinedIcon
-            className={Styles.ProjectsTableActionViewIcon}
+            className="TableActionViewIcon" onClick={()=> handleOpenInvestorView()}
           />
           <DeleteOutlineOutlinedIcon
-            className={Styles.ProjectsTableActionDeleteIcon}
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
       investorsDoc:<div className={Styles.ProjectDetailsInvestorTableInvestorDocumentButtonContainer}><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentViewButton} onClick={()=> handleOpenViewInvestorDocument()}>View</button><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentUploadButton} onClick={()=> handleOpenInvestorDocument()}>Upload</button></div>,
-      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton}>Generate</button>,
+      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton} onClick={()=> handleOpenGeneratedView()}>View</button>,
     },
     {
         no: "33",
@@ -174,18 +242,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
       finalAmount: "$50,974",
       status: "SPV",
       action: (
-        <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
-          <RemoveRedEyeOutlinedIcon
-            className={Styles.ProjectsTableActionViewIcon}
-          />
-          <DeleteOutlineOutlinedIcon
-            className={Styles.ProjectsTableActionDeleteIcon}
-          />
-        </div>
+        <div className="TableActionContainer">
+        <EditOutlinedIcon className="TableActionEditIcon" />
+        <RemoveRedEyeOutlinedIcon
+          className="TableActionViewIcon"
+        />
+        <DeleteOutlineOutlinedIcon
+          className="TableActionDeleteIcon"
+        />
+      </div>
       ),
       investorsDoc:<div className={Styles.ProjectDetailsInvestorTableInvestorDocumentButtonContainer}><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentViewButton} onClick={()=> handleOpenViewInvestorDocument()}>View</button><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentUploadButton } onClick={()=> handleOpenInvestorDocument()}>Upload</button></div>,
-      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton}>Generate</button>,
+      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton}>View</button>,
     },
     {
         no: "33",
@@ -193,18 +261,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
       finalAmount: "$50,974",
       status: "SPV",
       action: (
-        <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
-          <SaveAltOutlinedIcon
-            className={Styles.ProjectsTableActionDownloadIcon}
-          />
-          <DeleteOutlineOutlinedIcon
-            className={Styles.ProjectsTableActionDeleteIcon}
-          />
-        </div>
+        <div className="TableActionContainer">
+        <EditOutlinedIcon className="TableActionEditIcon" />
+        <RemoveRedEyeOutlinedIcon
+          className="TableActionViewIcon"
+        />
+        <DeleteOutlineOutlinedIcon
+          className="TableActionDeleteIcon"
+        />
+      </div>
       ),
       investorsDoc:<div className={Styles.ProjectDetailsInvestorTableInvestorDocumentButtonContainer}><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentViewButton} onClick={()=> handleOpenViewInvestorDocument()}>View</button><button className={Styles.ProjectDetailsInvestorTableInvestorDocumentUploadButton} onClick={()=> handleOpenInvestorDocument()}>Upload</button></div>,
-      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton}>Generate</button>,
+      docs:<button className={Styles.ProjectDetailsInvestorTableInvestorDocumentGenerateButton}>View</button>,
     },
 
   
@@ -216,8 +284,9 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
     finalAmount: "Final Amount ",
     status: "Status",
     action: "Actions",
+    docs:"Generated Docs",
     investorsDoc:"Investor's Docs",
-    docs:"Docs",
+    
   };
   const countPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -249,7 +318,7 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
 
   const headRow = () => {
     return Object.values(tableHead).map((title, index) => (
-      <td key={index}>{title}</td>
+      <th key={index}>{title}</th>
     ));
   };
 
@@ -263,15 +332,15 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
       projectName: "ABC Project",
       updatedOn: "01/19/2025",
       action: (
-        <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
-          <RemoveRedEyeOutlinedIcon
-            className={Styles.ProjectsTableActionViewIcon}
-          />
-          <DeleteOutlineOutlinedIcon
-            className={Styles.ProjectsTableActionDeleteIcon}
-          />
-        </div>
+        <div className="TableActionContainer">
+        
+        <SaveAltOutlinedIcon
+          className="TableActionViewIcon"
+        />
+        <DeleteOutlineOutlinedIcon
+          className="TableActionDeleteIcon"
+        />
+      </div>
       ),
        },
    
@@ -309,7 +378,7 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
 
   const headRowViewInvestorUpdatedDocument = () => {
     return Object.values(tableHeadViewInvestorUpdatedDocument).map((title, index) => (
-      <td key={index}>{title}</td>
+      <th key={index}>{title}</th>
     ));
   };
 
@@ -387,10 +456,10 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
       </div>
       <div className={Styles.ProjectDetailsTabAndNotesContainer}>
         <div className={Styles.ProjectDetailsPageTabsContainer}>
-          <Box sx={{ bgcolor: "background.paper" }}>
+          <Box >
             <AppBar
               position="static"
-              sx={{ bgcolor: "#fff", borderRadius: "10px" }}
+              sx={{ bgcolor: "#fff", borderRadius: "10px", boxShadow: "none !important" }}
             >
               <Tabs
                 value={value}
@@ -738,10 +807,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                 <DcoumentsPage/>
             </TabPanel>
             <TabPanel value={value} index={4} dir={theme.direction}>
-              five
+
+            <div className="PageHeader">
+            <p className="PageTableTitleText">Distributions</p>
+            <button className="PageTableNavContentButton" onClick={()=> handleOpenNewDistribution()}>Add New</button>
+            </div>
+            
             </TabPanel>
             <TabPanel value={value} index={5} dir={theme.direction}>
-              six
+            <div className="PageHeader">
+            <p className="PageTableTitleText">Project Cost</p>
+            <button className="PageTableNavContentButton" onClick={()=> handleOpenNewProjectCost()}>Add New</button>
+            </div>
             </TabPanel>
           </Box>
         </div>
@@ -755,7 +832,8 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     <ExpandMoreOutlinedIcon className={Styles.ProjectDetailsPAtiesAndNotesIcon} onClick={()=> HandleCahngePatiesAndNotes()}/>
                     </div>
                     {partiesAndNotesOpen === true ? <div className={Styles.ProjectDetailsPartiesContainer}>
-                            <p className={Styles.ProjectDetailsPartiesContainerText}>Mathew</p>
+                            <p className={Styles.ProjectDetailsPartiesContainerText}>Mathew   <span onClick={()=> handleOpenPartysProject()}><  AddBoxIcon /></span> </p>
+                          
                             <div className={Styles.ProjectDetailsPartiesContent}>
                                 <p className={Styles.ProjectDetailsPartiesContentTitle}>Status</p>
                                 <p className={Styles.ProjectDetailsPartiesContentText}>Investing In Deal</p>
@@ -774,14 +852,14 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                 <div className={Styles.ProjectDetailsPartiesAndNotesContent}> 
                     <div className={Styles.ProjectDetailsPartiesAndNotesContentHeader}>
                         <img src={NotesImage} alt="NotesImage"/>
-                        <p className={Styles.ProjectDetailsPartiesAndNotesContentHeaderText}>Notes</p>
+                        <p className={Styles.ProjectDetailsPartiesAndNotesContentHeaderText}>Notes </p>
                     </div>
                     <ExpandMoreOutlinedIcon  className={Styles.ProjectDetailsPAtiesAndNotesIcon} onClick={()=> HandleCahngeNotes()}/>
                 </div>
                 {notesOpen === true ? <div className={Styles.ProjectDetailsPartiesContainer}>
-                            <p className={Styles.ProjectDetailsPartiesContainerText}>Call With Robin</p>
+                            <p className={Styles.ProjectDetailsPartiesContainerText}>Call With Robin <span onClick={()=> handleOpenNotesDoc()}><  AddBoxIcon /></span></p>
                             <div className={Styles.ProjectDetailsPartiesContent}>
-                                <p className={Styles.ProjectDetailsPartiesContentTitle}>Note</p>
+                                <p className={Styles.ProjectDetailsPartiesContentTitle}>Note </p>
                                 <p className={Styles.ProjectDetailsPartiesContentText}>Spoke with Robin</p>
                             </div>
                     </div>:""}
@@ -795,17 +873,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box class="modal">
             <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
-              <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeader}>
-                <p className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderText}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
                   New Party's Projects
                 </p>
                 <CloseOutlinedIcon
                   onClick={() => handleClosePartysProject()}
-                  className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderTextIcon}
+                  className="ModelPopupHeaderIcon"
                 />
               </div>
+              <div className="ModelPopupbody">
               <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
                 <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
                   Information
@@ -820,14 +899,98 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
 
                     <InputStyled
                       id="outlined-basic"
+                      type="search"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      slotProps={{
+                        input: {
+                          endAdornment: <InputAdornment position="start"><SearchIcon/></InputAdornment>,
+                        },
+                      }}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+            <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                      Investing Entity Name
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                    Status
+                    </p>
+
+                    <SelectStyled
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    onChange={handleChangeRole}
+                  >
+                     <MenuItem value={10}>-None-</MenuItem>
+                    <MenuItem value={20}>Interested</MenuItem>
+                    <MenuItem value={30}>Investing In Project</MenuItem>
+                    <MenuItem value={40}>Passing On Project</MenuItem>
+                  </SelectStyled>
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                     Documents Received
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
                       className={Styles.LoginPageInputContainerInput}
                       inputProps={{ maxLength: 20 }}
                       name="firstname"
                       // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
                     />
                     {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                      Funds Received
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                      Investment Round
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
                   </div>
                   <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
@@ -844,46 +1007,23 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     {/* {error?.username && (
               <span className={Styles.registerErrormsg}>{error?.username}</span>
             )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                      Investing Entity Name
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+            <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                       Investment Method
                     </p>
 
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="lastname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
-                    />
+                    <SelectStyled
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    onChange={handleChangeRole}
+                  >
+                    <MenuItem value={10}>-None-</MenuItem>
+                    <MenuItem value={20}>SPV</MenuItem>
+                    <MenuItem value={30}>Direct to Production</MenuItem>
+                  </SelectStyled>
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                       Interested Amount
                     </p>
@@ -898,28 +1038,7 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                    Status
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                     Final Amount
                     </p>
 
@@ -933,80 +1052,22 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                
-                </div>
-              <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                     Documents Received
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
+                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                       Investor Comments
                     </p>
 
                     <InputStyled
                       id="outlined-basic"
                       className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
+                      inputProps={{ maxLength: 200 }}
                       name="lastname"
+                      multiline
+                      rows={4}
                       // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
                     />
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                      Funds Received
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                 
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
-                    <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                      Investment Round
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                     Bonus/Perks
                     </p>
@@ -1021,28 +1082,31 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
-                  <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
                     Co-Producer
                     </p>
 
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="lastname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
-                    />
+                    <SelectStyled
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    onChange={handleChangeRole}
+                  >
+                     <MenuItem value={10}>-None-</MenuItem>
+                    <MenuItem value={20}></MenuItem>
+                    <MenuItem value={30}></MenuItem>
+                    <MenuItem value={40}></MenuItem>
+                  </SelectStyled>
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
                   </div>
                 </div>
+                
+              
               </div>
-              <div className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsButtonContainer}>
+              </div>
+              <div className="ModelPopupfooter">
               <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleClosePartysProject()}>
                 Cancel
               </button>
@@ -1060,17 +1124,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box className="modal">
             <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
-              <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeader}>
-                <p className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderText}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
                  Upload Investor's Documents
                 </p>
                 <CloseOutlinedIcon
                   onClick={() => handleCloseInvestorDocument()}
-                  className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderTextIcon}
+                  className="ModelPopupHeaderIcon"
                 />
               </div>
+              <div className="ModelPopupbody">
               <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
                 <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
                   Upload Summary
@@ -1117,7 +1182,7 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                 <div className={Styles.CreateProjetsdetailsAddPartysInputContent}>
                   <div className={Styles.CreateProjetsdetailsAddPartysInputCart}>
                     <p className={Styles.CreateProjetsdetailsAddPartysInputCartText}>
-                      Updated On   <CalendarMonthOutlinedIcon/>
+                      Updated On   
                     </p>
 
                     <InputStyled
@@ -1125,6 +1190,7 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                       className={Styles.LoginPageInputContainerInput}
                       inputProps={{ maxLength: 20 }}
                       name="firstname"
+                      type="date"
                       // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
                     />
                     {/* {error?.username && (
@@ -1134,7 +1200,8 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                 </div>
                
               </div>
-              <div className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsButtonContainer}>
+              </div>
+              <div className="ModelPopupfooter">
               <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleCloseInvestorDocument()}>
                 Cancel
               </button>
@@ -1152,18 +1219,18 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={styleViewInvestorTable}>
+          <Box className="modal">
             <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
-              <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeader}>
-                <p className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderText}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
                  View Investor's Documents
                 </p>
                 <CloseOutlinedIcon
                   onClick={() => handleCloseViewInvestorDocument()}
-                  className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupHeaderTextIcon}
+                  className="ModelPopupHeaderIcon"
                 />
               </div>           
-           
+              <div className="ModelPopupbody">
               <div className={Styles.ProjectsDetailsPageInvestorTabsContainerTable}>
                   <table>
                     <thead>
@@ -1172,8 +1239,8 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
                     <tbody className="trhover">{tableDataViewInvestorUpdatedDocument()}</tbody>
                   </table>
                 </div>
-
-              <div className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsButtonContainer}>
+                </div>
+              <div className="ModelPopupfooter">
               <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleCloseViewInvestorDocument()}>
                 Cancel
               </button>
@@ -1184,6 +1251,419 @@ const handleCloseViewInvestorDocument= () => setOpenViewInvestorDocument(false);
             </div>
           </Box>
         </Modal>
+
+        <Modal
+          open={openNewDistribution}
+          onClose={handleCloseNewDistribution}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                New Distribution
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseNewDistribution()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>           
+              <div className="ModelPopupbody">
+              <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
+                <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
+                  Information
+                </p>                
+              </div>
+              <div className="InputContainer">
+                <div className="InputContent">
+                  <div className="InputCart">
+                    <p className="InputCartText">
+                    Distribution Name/Number
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+             <p className="InputCartText">
+                    Date of Distribution
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    <p className="InputCartText">
+                    Total Recouped to Date
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                       type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+            
+                  </div>
+                  <div className="InputCart">
+                  <p className="InputCartText">
+                    Project
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                       type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />    
+                    <p className="InputCartText">
+                    Amount of Destribution
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />             
+                  </div>
+                </div>
+               
+               
+              </div>
+                </div>
+              <div className="ModelPopupfooter">
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleCloseNewDistribution()}>
+                Cancel
+              </button>
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsSubmitButton} onClick={()=>handleCloseNewDistribution()}>
+                Save
+              </button>
+            </div>
+            </div>
+          </Box>
+        </Modal> 
+
+         <Modal
+          open={openNewProjectCost}
+          onClose={handleCloseNewProjectCost}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                New Project Cost
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseNewProjectCost()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>           
+              <div className="ModelPopupbody">
+              <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
+                <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
+                  Details
+                </p>                
+              </div>
+              <div className="InputContainer">
+                <div className="InputContent">
+                  <div className="InputCart">
+                    <p className="InputCartText">
+                    Cost Destribution
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="firstname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+             
+                  </div>
+                  <div className="InputCart">
+                  <p className="InputCartText">
+                   Total Cost
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                       type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />    
+                    <p className="InputCartText">
+                    Date of Cast
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />             
+                  </div>
+                </div>
+                <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
+                <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
+                  Additional Info
+                </p>                
+              </div>
+              <div className="InputContent">
+                <div className="InputCart">
+                  <p className="InputCartText">
+                    Status
+                    </p>   
+                  <SelectStyled
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    onChange={handleChangeRole}
+                  >
+                   <MenuItem value={10}>-None-</MenuItem>
+                    <MenuItem value={20}>Unreimbursed</MenuItem>
+                    <MenuItem value={30}>Reimbursed</MenuItem>
+                  </SelectStyled>
+
+                <p className="InputCartText">
+                    Date of Reimbursement
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    <p className="InputCartText">
+                    Expense Comments
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                       type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="firstname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+            
+                </div>
+                <div className="InputCart">
+                  <p className="InputCartText">
+                    Cost Incurred By
+                  </p>
+                  <InputStyled
+                      id="outlined-basic"
+                      type="search"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      slotProps={{
+                        input: {
+                          endAdornment: <InputAdornment position="start"><SearchIcon/></InputAdornment>,
+                        },
+                      }}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                  <p className="InputCartText">
+                    Project
+                  </p>
+                  <InputStyled
+                      id="outlined-basic"
+                      type="text"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                </div> 
+              </div>
+               
+              </div>
+                </div>
+              <div className="ModelPopupfooter">
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleCloseNewProjectCost()}>
+                Cancel
+              </button>
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsSubmitButton} onClick={()=>handleCloseNewProjectCost()}>
+                Save
+              </button>
+            </div>
+            </div>
+          </Box>
+        </Modal> 
+
+          <Modal
+          open={openGeneratedView}
+          onClose={handleCloseGeneratedView}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+                         
+              <div className="ModelPopupbody GeneratedView">
+                <h3>Do you want to send an email or download the file named “ABC Project Agreement2.652.pdf”?</h3>   
+                <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} >
+                Send Email
+              </button>
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsSubmitButton} >
+                Download
+              </button>     
+              </div>
+              
+            </div>
+          </Box>
+        </Modal> 
+
+        <Modal
+          open={openInvestorView}
+          onClose={handleCloseInvestorView}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+            <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                View Investor
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseInvestorView()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>                         
+              <div className="ModelPopupbody">
+                <div class={Styles.ProjectDetailsInformationContent}>
+                  <div class={Styles.ProjectDetailsInformationDetailsCard}>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardText}>Investor Name</p>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardTextdata}>Mathew</p>
+                  </div>
+                  <div class={Styles.ProjectDetailsInformationDetailsCard}>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardText}>Final Amount</p>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardTextdata}>$50,974</p>
+                  </div>
+                </div>
+                <div class={Styles.ProjectDetailsInformationContent}>
+                  <div class={Styles.ProjectDetailsInformationDetailsCard}>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardText}>Status</p>
+                    <p class={Styles.ProjectDetailsInformationDetailsCardTextdata}>SPV</p>
+                  </div>                 
+                </div>                 
+              </div>              
+            </div>
+          </Box>
+        </Modal>   
+
+         <Modal
+          open={openNotesDoc}
+          onClose={handleCloseNotesDoc}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+            <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                Add Notes
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseNotesDoc()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>                         
+              <div className="ModelPopupbody">
+              <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
+                <p className={Styles.CreateProjetsdetailsAddPartysProjectTitle}>
+                  Information
+                </p>                
+              </div>
+              <div className="InputContainer">
+                <div className="InputContent">
+                  <div className="InputCart">
+                    <p className="InputCartText">
+                    Title
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+
+                 
+             
+                  </div>
+                  <div className="InputCart">
+                  <p className="InputCartText">
+                  Notes
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="firstname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    </div>
+                  </div>
+                  </div>
+
+              </div>
+              <div className="ModelPopupfooter">
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsCancelButton} onClick={()=>handleCloseNotesDoc()}>
+                Cancel
+              </button>
+              <button className={Styles.CreateProjectDetailsInvestorTableAddPartsProjectsSubmitButton} onClick={()=>handleCloseNotesDoc()}>
+                Save
+              </button>
+            </div>              
+            </div>
+          </Box>
+        </Modal>            
+        
+
+
+
     </div>
   );
 };

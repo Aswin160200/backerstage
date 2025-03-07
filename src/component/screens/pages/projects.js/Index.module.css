@@ -25,6 +25,7 @@
     background-color: var(--whitecolor);
     border-radius: 50%;
     margin: 1rem;
+    
 }
 .ProjectsPagenavCartText{
     font-family: var(--defaultFontFamily);
@@ -32,29 +33,36 @@
     font-weight: var(--font-weight_500);
 }
 .ProjectsPageNavContainerButton{
-    padding: 0.5rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     margin: 0.5rem;
     border-radius: 5px;
-    border: 1px solid var(--lightBlueColor);
+    border: none;
     background-color: var(--lightBlueColor);
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
+    font-size: var(--font-size_18);
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
+}
+.ProjectsPageNavContainerButton:hover{
+    background-color: var(--darkBlueColor);
 }
 .ProjectsPageNavContainerExportButton{
-    padding: 0.5rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     margin: 0.5rem;
     border-radius: 5px;
-    border: 1px solid var(--lightRed);
+    border: none;
     background-color: var(--lightRed);
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
+    font-size: var(--font-size_18);
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
 }
+.ProjectsPageNavContainerExportButton:hover{
+
+    background-color: var(--redColor);
+    }
 .ProjectsPageTabsContainerTable{
     display: flex;
     flex-direction: column;
@@ -64,10 +72,10 @@
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 0 8px 4px var(--boxShadow);
+    font-family: var(--defaultFontFamily);
 }
 .projectTableActionContainer{
     display: flex;
-    align-items: center;
     gap: 5px;
 }
 .ProjectTableActionEditIcon{
@@ -75,24 +83,31 @@
     height: 10%;
     color: var(--geenColor);
     cursor: pointer;
+    background-color: var(--LightGray);
+    padding: 5px;
 }
 .ProjectsTableActionDownloadIcon{
     width: 10%;
     height: 10%;
     color: var(--purpleColor);
     cursor: pointer;
+    
 }
 .ProjectsTableActionViewIcon{
     width: 10%;
     height: 10%;
     color: var(--purpleColor);
     cursor: pointer;
+    background-color: var(--LightGray);
+    padding: 5px;
 }
 .ProjectsTableActionDeleteIcon{
     width: 10%;
     height: 10%;
     color: var(--lightRed);
     cursor: pointer;
+    background-color: var(--LightGray);
+    padding: 5px;
 }
 .ProjectPageTablePagination{
     display: flex;
@@ -108,22 +123,38 @@
 }
 .ProjectsPageModelPopupHeader{
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
-    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background: var(--LightGray8);
+    position: relative;
+    height: 25px;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 1px solid #ccc;
 }
 .ProjectsPageModelPopupHeaderText{
     margin: 0rem;
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_20);
-    font-weight: var(--font-weight_500);
+    font-size: var(--font-size_22);
+    font-weight: var(--font-weight_600);
+    color: var(--headerColor);
+    
+}
+.ProjectsPageModelPopupbody
+{
+    height: 70vh;
+    overflow-Y: scroll;
+    padding: 0px 20px;
 }
 .ProjectsPageModelPopupHeaderTextIcon{
     cursor: pointer;
+    right: 0px;
+    position: absolute;
+    top: 3px;
 }
 .CreateProjetsTitleContainer{
-        width: 90%;
-        padding: 1rem;
+        
     }
 .CreateProjetsTitle{
     font-family: var(--defaultFontFamily);
@@ -135,19 +166,18 @@
     display:flex;
     flex-wrap: wrap;
     align-items: center;
-    width: 90%;
+    
 }
 .CreateProjectsInputContent{
     display: flex;
-    justify-content: center;
-    justify-content: space-between;
-    align-items: center;
+    gap:20px;
     width: 100%;
+    margin-bottom: 20px;
 }
 .CreateProjcetsInputCart{
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 50%;
 }
 .CreateProjectsInputCartText{
     color: var(--darkColor);
@@ -159,9 +189,13 @@
 .CreateProjectsButtonContainer{
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    padding: 10px 20px;
+    text-align: center;
+    background: var(--LightGray8);
     justify-content: flex-end;
     align-items:center;
+    border-radius: 0px 0px 10px 10px;
+    border-top: 1px solid #ccc;
 }
 .CreateProjectsCancelButton{
     padding: 0.5rem 1.5rem;
@@ -186,4 +220,11 @@
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
+}
+.ProjectsPageTabsContainerTable .Search input
+{
+    border-radius: 5px;
+    border: 1px solid #e1e1e1 !important;
+    padding: 10px;
+    font-size: 16px;
 }

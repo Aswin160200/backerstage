@@ -2,7 +2,7 @@
    /* color */
    --backgroundcolor : #f0f0f0;
    --whitecolor : #fff;
-   --darkColor : #000;
+   --darkColor : #182b4b;
    --blueColor: #1d0086;
    --redColor: #ff0505;
    --darkBlue: #0c2138;
@@ -10,13 +10,16 @@
    --lightBlueColor: #2f8cff;
    --darkBlueColor:#172b4c;
    --darkAshColor:#686e8c;
-   --geenColor: #66f36d;
+   --geenColor: #1bc5bd;
    --darkGreenColor: #10a718;
-   --purpleColor:#c35cec;
-   --lightRed:#f04646;
+   --purpleColor:#8950fc;
+   --lightRed:#f64e60;
    --boxShadow : rgb(230, 228, 228);
    --tableBorderColor:#dbd9d9;
    --DartPurpleColor:#701594;
+   --LightGray:#f2f2f2;
+   --LightGray8:#f8f8f8;
+   --headerColor:#182b4b;
 
    /* font family */
    --defaultFontFamily :"Quicksand", serif;
@@ -76,8 +79,14 @@ input {
   min-width: 200px;
   border-radius: 10px;
   border: 2px solid #686e8c;
-  padding: 10px;
+  padding: 10px !important;
   font-size: 14px;
+}
+input:focus-visible
+{
+  box-shadow: none;
+  border: 0px;
+  outline: none;
 }
 
 table {
@@ -89,7 +98,7 @@ table {
 }
 
 thead {
-  background-color: #e6f0f3;
+  
   font-size: 16px;
   
 }
@@ -97,57 +106,223 @@ thead {
 th {
   text-align: left;
   padding: 0.5rem;
-  background-color: 1px solid #ffffff;
-  color: #686e8c;
+  color: #172c4a;  
+  border-bottom: 1px solid var(--tableBorderColor);
 }
 td {
   text-align: left;
   padding: 8px;
   border-bottom: 1px solid var(--tableBorderColor);
-
+  color: #686e8c;
 }
 
 tr {
-  height: 50px;
+  height: 70px;
 }
+
+
+.modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  background-color: var(--whitecolor);
+  border-radius: 10px;
+}
+.ModelPopupHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  background: var(--LightGray8);
+  position: relative;
+  height: 25px;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 1px solid #ccc;
+}
+.ModelPopupHeaderText{
+  margin: 0rem;
+  font-family: var(--defaultFontFamily);
+  font-size: var(--font-size_22);
+  font-weight: var(--font-weight_600);
+  color: var(--headerColor);
+}
+.ModelPopupHeaderIcon
+{
+  cursor: pointer;
+  right: 0px;
+  position: absolute;
+  top: 3px;
+}
+.ModelPopupbody {
+  max-height: 400px;
+  overflow-Y: auto;
+  padding: 0px 20px;
+}
+.ModelPopupfooter {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  text-align: center;
+  background: var(--LightGray8);
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 1px solid #ccc;
+}
+.TableActionContainer
+{
+  display: flex;
+  gap:5px;
+}
+.TableActionEditIcon {
+  width: 10%;
+  height: 10%;
+  color: var(--geenColor);
+  cursor: pointer;
+  background-color: var(--LightGray);
+  padding: 5px;
+}
+.TableActionViewIcon {
+  width: 10%;
+  height: 10%;
+  color: var(--purpleColor);
+  cursor: pointer;
+  background-color: var(--LightGray);
+  padding: 5px;
+}
+.TableActionDeleteIcon {
+  width: 10%;
+  height: 10%;
+  color: var(--lightRed);
+  cursor: pointer;
+  background-color: var(--LightGray);
+  padding: 5px;
+}
+.Search input   {
+  border-radius: 5px;
+border: 1px solid #e1e1e1 !important;
+padding: 10px;
+font-size: 16px;}
 
 /* select box */
 .css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline{
   border-color: rgb(166, 167, 172) !important; 
 }
 
+.PageHeader
+{
+  display: flex;
+  justify-content: space-between;
+}
 
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 60vh;
+.PageTableTitleText {
+  font-family: var(--defaultFontFamily);
+  font-weight: var(--font-weight_500);
+  font-size: var(--font-size_18);
+  color: var(--lightBlueColor);
+  margin: 0rem;
+}
+.PageTableNavContentButton {
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--lightBlueColor);
+  background-color: var(--lightBlueColor);
+  font-family: var(--defaultFontFamily);
+  font-size: var(--font-size_16);
+  font-weight: var(--font-weight_600);
+  color: var(--whitecolor);
+  cursor: pointer;
+}
+.CancelButton {
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--darkAshColor);
   background-color: var(--whitecolor);
-  border-radius: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-
+  font-family: var(--defaultFontFamily);
+  font-size: var(--font-size_16);
+  font-weight: var(--font-weight_500);
+  color: var(--darkBlueColor);
+  cursor: pointer;
 }
-
-@media (max-width: 1024px) {
-  .modal {
-    width: 90%;
-    height: 70vh;
-  }
+.SubmitButton {
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--darkBlue);
+  background-color: var(--darkBlue);
+  font-family: var(--defaultFontFamily);
+  font-size: var(--font-size_16);
+  font-weight: var(--font-weight_500);
+  color: var(--whitecolor);
+  cursor: pointer;
 }
-
-@media (max-width: 600px) {
-  .modal {
-    width: 95%;
-    height: 80vh;
-    padding: 12px;
-  }
+.ModalInnerTitle
+{
+  font-family: var(--defaultFontFamily);
+  font-weight: var(--font-weight_500);
+  font-size: var(--font-size_18);
+  color: var(--lightBlueColor);
+}
+.ModalInnerText
+{
+  font-family: var(--defaultFontFamily);
+  font-weight: var(--font-weight_500);
+  font-size: var(--font-size_16);
+  color: var(--darkColor);
+}
+.InputContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.InputContent {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+.InputCart {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.InputCartText {
+  color: var(--darkColor);
+  font-family: var(--defaultFontFamily);
+  font-size: var(--font-size_16);
+  font-weight: var(--font-weight_400);
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 
 .css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
- padding: 0.4rem !important;
-}
+  padding:9px !important;
+ }
+
+ .GeneratedView
+ {
+  text-align: center;
+  padding: 40px 40px
+ }
+ .GeneratedView h3
+ {
+  margin-bottom: 40px;
+    font-family: var(--defaultFontFamily);
+    font-size: var(--font-size_22);
+    font-weight: var(--font-weight_600);
+    color: var(--headerColor);
+ }
+
+
+
+

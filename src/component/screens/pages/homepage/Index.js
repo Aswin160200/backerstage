@@ -29,10 +29,8 @@ const HomePage = () => {
       img: <img src={AdminIcon} alt="" />,
       text: <Link className="Link" to="/admin">Admin User</Link>,
     },
-    // {
-    //   img: <img src={ProjectDocumentsImage} alt="" />,
-    //   text: "Project Documents",
-    // },
+    
+    
     // {
     //   img: <img src={PartysProjectImage} alt="" />,
     //   text: "Party's project",
@@ -51,12 +49,32 @@ const HomePage = () => {
       </div>
       <div className={Styles.HomePageCartContainerLayer}>
         <div className={Styles.HomePageCartContainer}>
-          {cart.map((data) => (
-            <div key={data.id} className={Styles.HomePageCartContent}>
-                {data.img}
-              <p>{data.text}</p>
+          <Link className={Styles.HomePageCartContent} to="/projects">
+            <div>            
+            <img src={ProjectsImage} alt="" />
+              <p>Projects</p>              
             </div>
-          ))}
+          </Link>
+          <Link className={Styles.HomePageCartContent} to="/investor">
+            <div >            
+            <img src={InvestorsImage} alt="" />
+              <p>Investors</p>              
+            </div>
+            </Link>
+            <Link className={Styles.HomePageCartContent} to="/co_producers">
+            <div >            
+            <img src={CoProducersImage} alt="" />
+              <p>Co-producers</p>              
+            </div>
+            </Link>
+            <Link className={Styles.HomePageCartContent} to="/admin">
+            <div >            
+            <img src={AdminIcon} alt="" />
+              <p>Admin User</p>              
+            </div>
+            </Link>
+          
+            
         </div>
       </div>
     </div>

@@ -14,48 +14,102 @@ import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import InsertPageBreakOutlinedIcon from "@mui/icons-material/InsertPageBreakOutlined";
 import SaveAltOutlinedIcon from '@mui/icons-material/SaveAltOutlined';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { Box, Modal } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+
+
+
+ export const InputStyled = styled(TextField)`
+  & .MuiOutlinedInput-root {
+    border-color: rgb(166, 167, 172);
+    color: rgb(13, 13, 14);
+    font-size: 14px;
+
+    & fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &:hover fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &.Mui-focused fieldset {
+      border-color: rgb(166, 167, 172);
+      border: 1px solid rgb(166, 167, 172);
+    }
+
+    &.Mui-active fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+  }
+`;
+
+export const SelectStyled = styled(Select)`
+  & .MuiOutlinedInput-root {
+    height: 44px;
+    font-size: 14px;
+    color: rgb(13, 13, 14);
+    border-radius: 6px;
+    transition: border-color 0.2s ease-in-out; 
+
+    & fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &:hover fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+
+    &.Mui-disabled fieldset {
+      border-color: rgb(166, 167, 172);
+    }
+  }
+`;
+
 
 const DcoumentsPage = () => {
   // tabledata
   const allData = [
     {
-        fileName: <p><InsertPageBreakOutlinedIcon/> ABC Project Agr...</p>,
+        fileName: <p><InsertPageBreakOutlinedIcon  style={{color: "red"}}/> ABC Project Agr...</p>,
         createddate: "01/19/2025",
         updatedOn: "01/19/2025",
         reletedTo:"ABC Project",
         parentFlow:"Poject Ho..",
         action: (
-        <div className={Styles.DcoumentsPageActionContainer}>
-          <EditOutlinedIcon className={Styles.DcoumentsPageActionEditIcon} />
+          <div className="TableActionContainer">
+          <EditOutlinedIcon className="TableActionEditIcon" />
           <SaveAltOutlinedIcon
-            className={Styles.DcoumentsPageActionDownloadIcon}
+            className="TableActionViewIcon"
           />
           <DeleteOutlineOutlinedIcon
-            className={Styles.DcoumentsPageActionDeleteIcon}
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
-      generate:<button className={Styles.DcoumentsPageGenerateButton}>Generate</button>,
+      generate:<button className={Styles.DcoumentsPageGenerateButton} onClick={()=> handlecOpenWaterMarkDoc()}>Generate</button>,
     },
   
       {
-        fileName: <p><InsertPageBreakOutlinedIcon/> ABC Project Agr...</p>,
+        fileName: <p><InsertPageBreakOutlinedIcon  style={{color: "red"}}/> ABC Project Agr...</p>,
         createddate: "01/19/2025",
         updatedOn: "01/19/2025",
         reletedTo:"ABC Project",
         parentFlow:"Poject Ho..",
-        action: (
-        <div className={Styles.DcoumentsPageActionContainer}>
-          <EditOutlinedIcon className={Styles.DcoumentsPageActionEditIcon} />
-          <SaveAltOutlinedIcon
-            className={Styles.DcoumentsPageActionDownloadIcon}
-          />
-          <DeleteOutlineOutlinedIcon
-            className={Styles.DcoumentsPageActionDeleteIcon}
-          />
-        </div>
+        action: (       
+         <div className="TableActionContainer">
+         <EditOutlinedIcon className="TableActionEditIcon" />
+         <SaveAltOutlinedIcon
+           className="TableActionViewIcon"
+         />
+         <DeleteOutlineOutlinedIcon
+           className="TableActionDeleteIcon"
+         />
+       </div>
       ),
-      generate:<button className={Styles.DcoumentsPageGenerateButton}>Generate</button>,
+      generate:<button className={Styles.DcoumentsPageGenerateButton} onClick={()=> handlecOpenWaterMarkDoc()}>Generate</button>,
     },
    
   ];
@@ -120,22 +174,42 @@ const DcoumentsPage = () => {
 
   const headRow = () => {
     return Object.values(tableHead).map((title, index) => (
-      <td key={index}>{title}</td>
+      <th key={index}>{title}</th>
     ));
   };
+
+  //   Add Documents Upload doc start
+  const [openDocumentUpload, setOpenDocumentUpload] = useState(false);
+  const handleOpenDocumentUpload = () => setOpenDocumentUpload(true);
+  const handleCloseDocumentUpload = () => setOpenDocumentUpload(false);
+  //   end Documents Upload doc start
+
+  //   Add Documents Upload doc start
+  const [openWaterMarkDoc, setOpenWaterMarkDoc] = useState(false);
+  const handlecOpenWaterMarkDoc = () => setOpenWaterMarkDoc(true);
+  const handleCloseWaterMarkDoc = () => setOpenWaterMarkDoc(false);
+  //   end Documents Upload doc start
+   
+
+  const [role, setRole] = useState("");
+
+  const handleChangeRole = (event) => {
+    setRole(event.target.value);
+  };
+
   return (
     <div>
       <div className={Styles.DcoumentsPagePageTabsContainerTable}>
        
         <div className={Styles.DcoumentsPagePageTableNavContent}>
-        <div class="search">
+        <div className="Search">
           <input
             placeholder="Search Campaign"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
         </div>
-        <button className={Styles.DcoumentsPagePageTableNavContentButton}>Upload Document</button>
+        <button className={Styles.DcoumentsPagePageTableNavContentButton} onClick={()=> handleOpenDocumentUpload()}>Upload Document</button>
         </div>
         <p className={Styles.DcoumentsPageTableTitleText}>Project Home</p>
         <table>
@@ -153,6 +227,196 @@ const DcoumentsPage = () => {
           />
         </div>
       </div>
+
+
+      <Modal
+          open={openDocumentUpload}
+          onClose={handleCloseDocumentUpload}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                 Upload
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseDocumentUpload()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>           
+             
+              <div className="ModelPopupbody">
+              <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>
+                <p className="ModalInnerTitle">
+                  Upload Summary
+                </p>
+                <p className="ModalInnerText">
+                  You are going To Upload The File Named "ABC Project Agreement2.652.pdf"
+                </p>
+              </div>
+              <div className="InputContainer">
+                <div className="InputContent">
+                  <div className="InputCart">
+                    <p className="InputCartText">
+                      File Name
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+            <p className="InputCartText">
+                      Document Category
+                    </p>
+
+                     <SelectStyled
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={role}
+                                        onChange={handleChangeRole}
+                                      >
+                                         <MenuItem value={10}>-None-</MenuItem>
+                                        <MenuItem value={20}>Agreements</MenuItem>
+                                        <MenuItem value={30}>Completed Documents</MenuItem>
+                                        <MenuItem value={40}>Financials</MenuItem>
+                                      </SelectStyled>
+
+                                      <p className="InputCartText">
+                      To
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+            
+                  </div>
+                  <div className="InputCart">
+                  <p className="InputCartText">
+                      Description
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                     
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+                  </div>
+                </div>
+               
+               
+              </div>
+              </div>
+              <div className="ModelPopupfooter">
+              <button className="CancelButton" onClick={()=>handleCloseDocumentUpload()}>
+                Cancel
+              </button>
+              <button className="SubmitButton" onClick={()=>handleCloseDocumentUpload()}>
+                Upload
+              </button>
+            </div>
+            </div>
+          </Box>
+        </Modal> 
+
+        <Modal
+          open={openWaterMarkDoc}
+          onClose={handleCloseWaterMarkDoc}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+            <div className={Styles.ProjectsDetailsPageAddPartysProjectModelPopupContainer}>
+              <div className="ModelPopupHeader">
+                <p className="ModelPopupHeaderText">
+                 Generate Watermarked Document
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseWaterMarkDoc()}
+                  className="ModelPopupHeaderIcon"
+                />
+              </div>           
+             
+              <div className="ModelPopupbody">
+              <div className={Styles.CreateProjetsdetailsAddPartysProjectTitleContainer}>                
+                <p className="ModalInnerText">
+                  You are going To Generate The File Named "ABC Project Agreement2.652.pdf"
+                </p>
+              </div>
+              <div className="InputContainer">
+                <div className="InputContent">
+                  <div className="InputCart">
+                    <p className="InputCartText">
+                      File Name
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+            
+                  </div>
+                  <div className="InputCart">
+                  <p className="InputCartText">
+                      Select Investor
+                    </p>
+
+                     <SelectStyled
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={role}
+                                        onChange={handleChangeRole}
+                                      >
+                                         <MenuItem value={10}>-None-</MenuItem>
+                                        <MenuItem value={20}>Mathew</MenuItem>
+                                        <MenuItem value={30}>Mathew</MenuItem>
+                                        <MenuItem value={40}>Mathew</MenuItem>
+                                      </SelectStyled>
+
+                                      
+                  </div>
+                </div>
+               
+               
+              </div>
+              </div>
+              <div className="ModelPopupfooter">
+              <button className="CancelButton" onClick={()=>handleCloseWaterMarkDoc()}>
+                Cancel
+              </button>
+              <button className="SubmitButton" onClick={()=>handleCloseWaterMarkDoc()}>
+                Upload
+              </button>
+            </div>
+            </div>
+          </Box>
+        </Modal>               
+
     </div>
   );
 };

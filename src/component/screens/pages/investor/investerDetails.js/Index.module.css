@@ -269,161 +269,19 @@
   }
   .InvestorDetailsTableActionEditIcon{
     width: 10%;
-  height: 10%;
-  color: var(--geenColor);
-  cursor: pointer;
-  background-color: var(--LightGray);
-  padding: 5px;
+    height: 10%;
+    color: var(--geenColor);
+    cursor: pointer;
   }
   .InvestorDetailsTableActionViewIcon{
     width: 10%;
     height: 10%;
     color: var(--purpleColor);
     cursor: pointer;
-    background-color: var(--LightGray);
-    padding: 5px;
   }
   .InvestorDetailsTableActionDeleteIcon{
     width: 10%;
     height: 10%;
     color: var(--lightRed);
     cursor: pointer;
-    background-color: var(--LightGray);
-    padding: 5px;
-  }
-
-
-  .CreateInvestorMainContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.CreateInvestorTitleContainer{
-    width: 90%;
-    padding: 1rem;
-}
-.CreateInvestorTitle{
-    font-family: var(--defaultFontFamily);
-    font-weight: var(--font-weight_500);
-    font-size: var(--font-size_18);
-    color: var(--lightBlueColor);
-}
-.CreateInvestorInputContainer{
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 90%;
-}
-.CreateInvestorInputContent{
-    display: flex;
-    justify-content: center;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-.CreateInvestorInputCart {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-  }
-  .CreateInvestorInputCartSingleInput{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  } 
-  .CreateInvestorInputCartText {
-    color: var(--darkColor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_400);
-    letter-spacing: 0.3px;
-  }
-  .CreateInvestorButtonContainer{
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    justify-content: center;
-    align-items:center;
-    margin: 1rem 0rem;
-  }
-  .CreateInvestorCancelButton{
-    padding: 0.5rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid var(--darkAshColor);
-    background-color: var(--whitecolor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_500);
-    color: var(--darkBlueColor);
-    cursor: pointer;
-  }
-  .CreateInvestorSubmitButton{
-    padding: 0.5rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid var(--darkAshColor);
-    background-color: var(--darkBlueColor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_500);
-    color: var(--whitecolor);
-    cursor: pointer;
-  }
-  .ViewInvestorPageNavContainerButton{
-    padding: 0.5rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid var(--lightBlueColor);
-    background-color: var(--lightBlueColor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_500);
-    color: var(--whitecolor);
-    cursor: pointer;
-  }
-  .CreateInvestorButtonContentExportButton{
-    padding: 0.5rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid var(--lightRed);
-    background-color: var(--lightRed);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_500);
-    color: var(--whitecolor);
-    cursor: pointer;
-
-  }
-  .CreateInvestorInputCartAccreditedt{
-    display: flex;
-    align-items: center;
-  }
-  .CreateInvestorInputCartAccreditedtText{
-    color: var(--darkColor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_400);
-    letter-spacing: 0.3px;
-  }
-  .CreateInvestorTitleContainerHeader{
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid var(--ashColor);    
-
-  }
-  .CreateInvestorTitleContainerHeaderText{
-    font-family: var(--defaultFontFamily);
-    font-weight: var(--font-weight_600);
-    font-size: var(--font-size_24);
-    color: var(--darkColor);
-  }
-  .CreateInvestorTitleContainerFooter{
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid var(--ashColor);
-    margin-top: 1rem;
-    padding: 0.5rem;
-
   }

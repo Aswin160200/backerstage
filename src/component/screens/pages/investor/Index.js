@@ -27,11 +27,6 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Link } from "react-router-dom";
-import Checkbox from "@mui/material/Checkbox";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import { FormControl, InputAdornment, InputLabel } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,49 +48,6 @@ function TabPanel(props) {
   );
 }
 
-export const SelectStyledFilter = styled(Select)`
-  & .MuiOutlinedInput-root {
-    font-size: 14px;
-    color: rgb(13, 13, 14);
-    border-radius: 8px;
-    transition: border-color 0.2s ease-in-out;
-    display: flex;
-    align-items: center; /* Center text vertically */
-    height: 36px; /* Reduce height to match image */
-
-    & fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-
-    &:hover fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-
-    &.Mui-disabled fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-
-    & .MuiOutlinedInput-input {
-      padding: 4px 10px !important; /* Reduce internal padding */
-      height: auto;
-      display: flex;
-      align-items: center;
-    }
-
-    & .MuiSelect-icon {
-      right: 8px; /* Adjust dropdown icon positioning */
-    }
-
-    /* Fix padding issue */
-    & .MuiSelect-select {
-      padding: 4px 10px !important; /* Override padding */
-      display: flex;
-      align-items: center;
-    }
-  }
-`;
-
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
@@ -113,6 +65,7 @@ export const InputStyled = styled(TextField)`
   & .MuiOutlinedInput-root {
     border-color: rgb(166, 167, 172);
     color: rgb(13, 13, 14);
+    height: 46px;
     font-size: 14px;
 
     & fieldset {
@@ -131,16 +84,8 @@ export const InputStyled = styled(TextField)`
     &.Mui-active fieldset {
       border-color: rgb(166, 167, 172);
     }
-        & .MuiOutlinedInput-input {
-    padding: 8px 12px; /* Adjust padding to make it smaller */
-  }
-
-  & .MuiInputAdornment-root {
-    margin-right: 8px; /* Adjust spacing for the icon */
-  }
   }
 `;
-
 
 const style = {
   position: "absolute",
@@ -155,29 +100,6 @@ const style = {
   borderRadius: "10px",
   overflowY: "scroll",
 };
-
-
-export const SelectStyled = styled(Select)`
-  & .MuiOutlinedInput-root {
-    height: 44px;
-    font-size: 14px;
-    color: rgb(13, 13, 14);
-    border-radius: 6px;
-    transition: border-color 0.2s ease-in-out;
-
-    & fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-
-    &:hover fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-
-    &.Mui-disabled fieldset {
-      border-color: rgb(166, 167, 172);
-    }
-  }
-`;
 const InvestorPage = () => {
   const theme = useTheme();
   let dispatch = useDispatch();
@@ -205,6 +127,9 @@ const InvestorPage = () => {
   const editHandleOpen = () => setEditModel(true);
   const editHandleClose = () => setEditModel(false);
 
+  const [viewModel, setViewModel] = useState(false);
+  const viewHandleOpen = () => setViewModel(true);
+  const viewHandleClose = () => setViewModel(false);
 
   const [createInvestor, setCreateInvestor] = useState({
     firstname: "",
@@ -227,13 +152,13 @@ const InvestorPage = () => {
     invesment_method: "",
   });
 
- 
+  console.log(createInvestor, "createInvestor");
   useEffect(() => {
     dispatch(getAllInvestors());
   }, []);
 
   const addNewInvestor = () => {
-    // dispatch(addInvestors(createInvestor));
+    dispatch(addInvestors(createInvestor));
     handleClose();
   };
 
@@ -252,7 +177,7 @@ const InvestorPage = () => {
     if (investorsList?.data) {
       const mappedData = investorsList.data.map((item, index) => ({
         S_no: index + 1,
-        investor_Name:`${item.firstname} ${item.lastname}`,
+        investor_Name: <Link to="/investors_details" className="Link">{item.firstname} {item.lastname}</Link>,
         email: item.emailid,
         state: item.state,
         status: item.status,
@@ -264,11 +189,10 @@ const InvestorPage = () => {
               className={Styles.ViewTableActionEditIcon}
               onClick={() => handleEdit(item.investorid)}
             />
-             <Link to="/investors_details" className="Link">
             <RemoveRedEyeOutlinedIcon
               className={Styles.ViewTableActionViewIcon}
-             
-            /></Link>
+              onClick={() => handleView(item.investorid)}
+            />
             <DeleteOutlineOutlinedIcon
               className={Styles.ViewTableActionDeleteIcon}
             />
@@ -289,7 +213,10 @@ const InvestorPage = () => {
     editHandleOpen();
   };
 
-
+  const handleView = (id) => {
+    dispatch(editInvestors(id));
+    viewHandleOpen();
+  };
   const searchData = useRef(
     throttle((val) => {
       const query = val.toLowerCase();
@@ -334,37 +261,6 @@ const InvestorPage = () => {
       <td key={index}>{title}</td>
     ));
 
-
-    const [role, setRole] = useState("1");
-
-    const handleChangeRole = (event) => {
-      setRole(event.target.value);
-    };
-
-    const [selectedStatus, setSelectedStatus] = useState(""); // For status filter
-    const [selectedState, setSelectedState] = useState(""); // For state filter
-
-
-    const handleStatusChange = (event) => {
-      setSelectedStatus(event.target.value);
-    };
-    
-    const handleStateChange = (event) => {
-      setSelectedState(event.target.value);
-    };
-
-    const filteredData = allData.filter((item) => {
-      return (
-        (selectedStatus === "" || item.status === selectedStatus) &&
-        (selectedState === "" || item.state === selectedState)
-      );
-    });
-
-    // useEffect(() => {
-    //   updatePage(1);
-    // }, [filteredData]);
-    
-
   return (
     <div className={Styles.InvestorPageMainContainer}>
       <HeaderPage />
@@ -390,64 +286,51 @@ const InvestorPage = () => {
             </button>
           </div>
         </div>
-       
+        {/* <div className={Styles.InvestorPageTabsContainer}>
+          <Box sx={{ bgcolor: "background.paper" }}>
+            <AppBar position="static" sx={{ bgcolor: "#fff", borderRadius: "10px" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="secondary"
+                textColor="inherit"
+                variant="fullWidth"
+                aria-label="full width tabs example"
+                TabIndicatorProps={{ sx: { backgroundColor: "#3719a3", height: "2px", borderRadius: "2px" } }} 
+              >
+                <Tab label={<div className={Styles.TabHeader}><img src={addIcon} alt="" className={Styles.TabAddIcon}/><p className={Styles.TabAddIconTExt}>Create New Investor</p></div>} {...a11yProps(0)} />
+                <Tab label={<div className={Styles.TabHeader}><img src={addIcon} alt="" className={Styles.TabAddIcon}/><p className={Styles.TabAddIconTExt}>View All Investor</p></div>} {...a11yProps(1)} />
+               
+              </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0} dir={theme.direction}>
+              <CreateInvestor/>
+            </TabPanel>
+            <TabPanel value={value} index={1} dir={theme.direction}>
+              <ViewInvestor/>
+            </TabPanel>
+          </Box>
+        </div> */}
         <div className={Styles.InvestorPageTabsContainerTable}>
-          <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-            {/* Search Input */}
-            <InputStyled
+          <div className="search">
+            <input
               placeholder="Search Investor"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                },
-              }}
             />
-
-            {/* Status Filter */}
-            <FormControl sx={{ minWidth: 200, }}>
-                <SelectStyledFilter value={selectedStatus} onChange={handleStatusChange}>
-                  <MenuItem value="">All</MenuItem>
-                  <MenuItem value="active">Active</MenuItem>
-                  <MenuItem value="inActive">InActive</MenuItem>
-                </SelectStyledFilter>
-            </FormControl>
-
-            {/* State Filter */}
-            <FormControl sx={{ minWidth: 200 }}>
-              <SelectStyledFilter value={selectedState} onChange={handleStateChange}>
-                <MenuItem value="">All</MenuItem>
-                <MenuItem value="Alabama">Alabama</MenuItem>
-                <MenuItem value="Florida">Florida</MenuItem>
-                <MenuItem value="Louisiana">Louisiana</MenuItem>
-                <MenuItem value="Washington">Washington</MenuItem>
-                <MenuItem value="Wisconsin">Wisconsin</MenuItem>
-              </SelectStyledFilter>
-            </FormControl>
           </div>
-
-          {/* Table */}
           <table>
             <thead>
               <tr>{headRow()}</tr>
             </thead>
-            <tbody className="trhover">
-              {filteredData.map((key, index) => tableRows({ key, index }))}
-            </tbody>
+            <tbody className="trhover">{tableData()}</tbody>
           </table>
-
-          {/* Pagination */}
           <div className={Styles.InvestorPageTablePagination}>
             <Pagination
               pageSize={countPerPage}
               onChange={updatePage}
               current={currentPage}
-              total={filteredData.length}
+              total={allData.length}
             />
           </div>
         </div>
@@ -458,11 +341,8 @@ const InvestorPage = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="modal">
+        <Box sx={style}>
           <div className={Styles.CreateInvestorMainContainer}>
-          <div className={Styles.CreateInvestorTitleContainerHeader}>
-              <p className={Styles.CreateInvestorTitleContainerHeaderText}>New Investor</p>
-            </div>
             <div className={Styles.CreateInvestorTitleContainer}>
               <p className={Styles.CreateInvestorTitle}>Invester Details</p>
             </div>
@@ -517,7 +397,6 @@ const InvestorPage = () => {
 
                   <InputStyled
                     id="outlined-basic"
-                    type="search"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
                     name="emailid"
@@ -640,10 +519,18 @@ const InvestorPage = () => {
                     Accredited?
                   </p>
 
-                  <div className={Styles.CreateInvestorInputCartAccreditedt}>
-                    <p className={Styles.CreateInvestorInputCartAccreditedtText} > <Checkbox /> Yes</p>
-                    <p className={Styles.CreateInvestorInputCartAccreditedtText} > <Checkbox /> No</p>
-                  </div>
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    name="accredited"
+                    onChange={(e) =>
+                      setCreateInvestor({
+                        ...createInvestor,
+                        accredited: e.target.value,
+                      })
+                    }
+                  />
                   {/* {error?.username && (
               <span className={Styles.registerErrormsg}>{error?.username}</span>
             )} */}
@@ -653,18 +540,13 @@ const InvestorPage = () => {
                     Refferral Source
                   </p>
 
-                  <SelectStyled
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={role}
-                    onChange={handleChangeRole}
-                  >
-                    <MenuItem value={1}>- None -</MenuItem>
-                    <MenuItem value={10}>Facebook</MenuItem>
-                    <MenuItem value={20}>Instagram</MenuItem>
-                    <MenuItem value={30}>Website</MenuItem>
-                    <MenuItem value={30}>Referred By Friend</MenuItem>
-                  </SelectStyled>
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    name="username"
+                    // onChange={(e) => setCreateInvestor({ ...createInvestor,: e.target.value })}
+                  />
                   {/* {error?.username && (
               <span className={Styles.registerErrormsg}>{error?.username}</span>
             )} */}
@@ -678,7 +560,6 @@ const InvestorPage = () => {
 
                   <InputStyled
                     id="outlined-basic"
-                    type="date"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
                     name="date_added"
@@ -715,7 +596,7 @@ const InvestorPage = () => {
             )} */}
                 </div>
               </div>
-              <div className={Styles.CreateInvestorInputCart}>
+              <div className={Styles.CreateInvestorInputCartSingleInput}>
                 <p className={Styles.CreateInvestorInputCartText}>
                   General Comments
                 </p>
@@ -723,8 +604,6 @@ const InvestorPage = () => {
                   id="outlined-basic"
                   className={Styles.LoginPageInputContainerInput}
                   inputProps={{ maxLength: 200 }}
-                  multiline
-                  rows={4}
                   name="username"
                   onChange={(e) =>
                     setCreateInvestor({
@@ -738,7 +617,7 @@ const InvestorPage = () => {
             )} */}
               </div>
             </div>
-            <div className={Styles.CreateInvestorTitleContainerFooter}>
+            <div className={Styles.CreateInvestorButtonContainer}>
               <button
                 className={Styles.CreateInvestorCancelButton}
                 onClick={() => handleClose()}
@@ -762,13 +641,12 @@ const InvestorPage = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="modal">
+        <Box sx={style}>
           <div className={Styles.CreateInvestorMainContainer}>
-          <div className={Styles.CreateInvestorTitleContainerHeader}>
-              <p className={Styles.CreateInvestorTitleContainerHeaderText}>Edit Investor</p>
-            </div>
             <div className={Styles.CreateInvestorTitleContainer}>
-              <p className={Styles.CreateInvestorTitle}>Invester Details</p>
+              <p className={Styles.CreateInvestorTitle}>
+                Edit Invester Details
+              </p>
             </div>
             <div className={Styles.CreateInvestorInputContainer}>
               <div className={Styles.CreateInvestorInputContent}>
@@ -781,17 +659,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="firstname"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        firstname: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.firstname}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>
@@ -802,17 +673,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="lastname"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        lastname: e.target.value,
-                      })
-                    }
+                    defaultValue={EditinvestorsList?.lastname}
+                    name="username"
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
               </div>
               <div className={Styles.CreateInvestorInputContent}>
@@ -821,20 +685,12 @@ const InvestorPage = () => {
 
                   <InputStyled
                     id="outlined-basic"
-                    type="search"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="emailid"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        emailid: e.target.value,
-                      })
-                    }
+                    defaultValue={EditinvestorsList?.emailid}
+                    name="username"
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>Phone</p>
@@ -843,17 +699,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="mobilenumber"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        mobilenumber: e.target.value,
-                      })
-                    }
+                    defaultValue={EditinvestorsList?.mobilenumber}
+                    name="username"
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
               </div>
               <div className={Styles.CreateInvestorInputContent}>
@@ -866,17 +715,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="addtess"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        addtess: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.addtess}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>City</p>
@@ -885,17 +727,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="city"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        city: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.city}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
               </div>
               <div className={Styles.CreateInvestorInputContent}>
@@ -906,17 +741,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="state"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        state: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.state}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>Zip Code</p>
@@ -925,17 +753,10 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="zipcode"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        zipcode: e.target.value,
-                      })
-                    }
+                    defaultValue={EditinvestorsList?.zipcode}
+                    name="username"
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
               </div>
               <div className={Styles.CreateInvestorInputContent}>
@@ -944,34 +765,28 @@ const InvestorPage = () => {
                     Accredited?
                   </p>
 
-                  <div className={Styles.CreateInvestorInputCartAccreditedt}>
-                    <p className={Styles.CreateInvestorInputCartAccreditedtText} > <Checkbox /> Yes</p>
-                    <p className={Styles.CreateInvestorInputCartAccreditedtText} > <Checkbox /> No</p>
-                  </div>
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    name="username"
+                    defaultValue={EditinvestorsList?.accredited}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
+                  />
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>
                     Refferral Source
                   </p>
 
-                  <SelectStyled
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={role}
-                    onChange={handleChangeRole}
-                  >
-                    <MenuItem value={1}>- None -</MenuItem>
-                    <MenuItem value={10}>Facebook</MenuItem>
-                    <MenuItem value={20}>Instagram</MenuItem>
-                    <MenuItem value={30}>Website</MenuItem>
-                    <MenuItem value={30}>Referred By Friend</MenuItem>
-                  </SelectStyled>
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    name="username"
+                    defaultValue=""
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
+                  />
                 </div>
               </div>
               <div className={Styles.CreateInvestorInputContent}>
@@ -982,20 +797,12 @@ const InvestorPage = () => {
 
                   <InputStyled
                     id="outlined-basic"
-                    type="date"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="date_added"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        date_added: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.date_added}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
                 <div className={Styles.CreateInvestorInputCart}>
                   <p className={Styles.CreateInvestorInputCartText}>
@@ -1006,20 +813,13 @@ const InvestorPage = () => {
                     id="outlined-basic"
                     className={Styles.LoginPageInputContainerInput}
                     inputProps={{ maxLength: 20 }}
-                    name="investor_probability"
-                    onChange={(e) =>
-                      setCreateInvestor({
-                        ...createInvestor,
-                        investor_probability: e.target.value,
-                      })
-                    }
+                    name="username"
+                    defaultValue={EditinvestorsList?.investor_probability}
+                    //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                   />
-                  {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
                 </div>
               </div>
-              <div className={Styles.CreateInvestorInputCart}>
+              <div className={Styles.CreateInvestorInputCartSingleInput}>
                 <p className={Styles.CreateInvestorInputCartText}>
                   General Comments
                 </p>
@@ -1027,22 +827,13 @@ const InvestorPage = () => {
                   id="outlined-basic"
                   className={Styles.LoginPageInputContainerInput}
                   inputProps={{ maxLength: 200 }}
-                  multiline
-                  rows={4}
                   name="username"
-                  onChange={(e) =>
-                    setCreateInvestor({
-                      ...createInvestor,
-                      general_comments: e.target.value,
-                    })
-                  }
+                  defaultValue={EditinvestorsList?.general_comments}
+                  //   onChange={(e) => setLogin({ ...login, username: e.target.value })}
                 />
-                {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
               </div>
             </div>
-            <div className={Styles.CreateInvestorTitleContainerFooter}>
+            <div className={Styles.CreateInvestorButtonContainer}>
               <button
                 className={Styles.CreateInvestorCancelButton}
                 onClick={() => editHandleClose()}
@@ -1060,6 +851,202 @@ const InvestorPage = () => {
         </Box>
       </Modal>
 
+      <Modal
+        open={viewModel}
+        onClose={viewHandleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div className={Styles.CreateInvestorMainContainer}>
+            <div className={Styles.CreateInvestorTitleContainer}>
+              <p className={Styles.CreateInvestorTitle}>
+                View Invester Details
+              </p>
+            </div>
+            <div className={Styles.CreateInvestorInputContainer}>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    First Name
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    value={EditinvestorsList?.firstname}
+                    disabled
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Last Name
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    value={EditinvestorsList?.lastname}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>Email</p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    value={EditinvestorsList?.emailid}
+                    disabled
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>Phone</p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    value={EditinvestorsList?.mobilenumber}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Street Address
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.addtess}
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>City</p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.city}
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>State</p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.state}
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>Zip Code</p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    value={EditinvestorsList?.zipcode}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Accredited?
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.accredited}
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Refferral Source
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value=""
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputContent}>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Date Added
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.date_added}
+                  />
+                </div>
+                <div className={Styles.CreateInvestorInputCart}>
+                  <p className={Styles.CreateInvestorInputCartText}>
+                    Investor Probability
+                  </p>
+
+                  <InputStyled
+                    id="outlined-basic"
+                    className={Styles.LoginPageInputContainerInput}
+                    inputProps={{ maxLength: 20 }}
+                    disabled
+                    value={EditinvestorsList?.investor_probability}
+                  />
+                </div>
+              </div>
+              <div className={Styles.CreateInvestorInputCartSingleInput}>
+                <p className={Styles.CreateInvestorInputCartText}>
+                  General Comments
+                </p>
+                <InputStyled
+                  id="outlined-basic"
+                  className={Styles.LoginPageInputContainerInput}
+                  inputProps={{ maxLength: 200 }}
+                  disabled
+                  value={EditinvestorsList?.general_comments}
+                />
+              </div>
+            </div>
+            <div className={Styles.CreateInvestorButtonContainer}>
+              <button
+                className={Styles.CreateInvestorCancelButton}
+                onClick={() => viewHandleClose()}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
 };

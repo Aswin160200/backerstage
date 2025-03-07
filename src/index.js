@@ -18,12 +18,12 @@ import CoProducers from './component/screens/pages/CoProducers/Index.js';
 import CoProducersDetails from './component/screens/pages/CoProducers/coProducersDetails.js/Index.js';
 import MasterAdmin from './component/screens/pages/masterAdmin/index.js';
 import MasterAdminDetails from './component/screens/pages/masterAdmin/masterAdminDetails/Index.js';
-import MasterAdminLogin from './component/screens/authendication/masterAdminLogin/Index.js';
-import SuperAdminDashboard from './component/screens/pages/superAdmin/dashboard/Index.js';
-import Producers from './component/screens/pages/superAdmin/producers/Index.js';
-import ProducerDetails from './component/screens/pages/superAdmin/producers/producersDetails/Index.js';
-import Subscriptions from './component/screens/pages/superAdmin/subscriptions/Index.js';
-import SubscriptionDetails from './component/screens/pages/superAdmin/subscriptions/subscriptionDetails/Index.js';
+import MasterAdminLogin from "./component/screens/authendication/masterAdminLogin/Index.js"
+import SuperAdminDashboard from "./component/screens/pages/superAdmin/dashboard/Index.js"
+import Producers from "./component/screens/pages/superAdmin/producers/Index.js"
+import ProducerDetails from "./component/screens/pages/superAdmin/producers/producersDetails/Index.js"
+import Subscriptions from "./component/screens/pages/superAdmin/subscriptions/Index.js"
+import SubscriptionDetails from "./component/screens/pages/superAdmin/subscriptions/subscriptionDetails/Index.js"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -42,12 +42,14 @@ root.render(
         <Route path="/co_producers_details" element={<CoProducersDetails  />} />
         <Route path="/admin" element={<MasterAdmin  />} />
         <Route path="/admin_details" element={<MasterAdminDetails  />} />
-        <Route path="/master_admin_login" element={<MasterAdminLogin  />} />
+        <Route path="/master_admin" element={<MasterAdminLogin  />} />
         <Route path="/master_admin_dashboard" element={<SuperAdminDashboard  />} />
         <Route path="/producers" element={<Producers  />} />
         <Route path="/producers_details" element={<ProducerDetails  />} />
         <Route path="/subscription" element={<Subscriptions  />} />
         <Route path="/subscription_details" element={<SubscriptionDetails  />} />
+
+
       </Routes>
       </Provider>
     </BrowserRouter>

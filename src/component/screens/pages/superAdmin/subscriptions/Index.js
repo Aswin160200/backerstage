@@ -102,7 +102,6 @@ const Subscriptions = () => {
       subscriptionPlan: "Premium",
       from: "10/21/2024",
       to: "04/21/2025",
-      amountPaid:"$2500.00",
       paymentMethod: "Credit Card",
       status: "Active",
       action: (
@@ -125,11 +124,10 @@ const Subscriptions = () => {
     {
       no: "2",
       name: "Robin Pattison",
-      subscriptionPlan: "Trial",
-      from: "03/01/2025",
-      to: "03/14/2025",
-      amountPaid:"$0",
-      paymentMethod: "NIL",
+      subscriptionPlan: "Premium",
+      from: "10/21/2024",
+      to: "04/21/2025",
+      paymentMethod: "Credit Card",
       status: "Active",
       action: (
         <div className={Styles.SubscriptionsActionContainer}>
@@ -154,7 +152,6 @@ const Subscriptions = () => {
       subscriptionPlan: "Premium",
       from: "10/21/2024",
       to: "04/21/2025",
-      amountPaid:"$2500.00",
       paymentMethod: "Credit Card",
       status: "Active",
       action: (
@@ -180,7 +177,6 @@ const Subscriptions = () => {
       subscriptionPlan: "Premium",
       from: "10/21/2024",
       to: "04/21/2025",
-      amountPaid:"$2500.00",
       paymentMethod: "Credit Card",
       status: "Active",
       action: (
@@ -206,7 +202,6 @@ const Subscriptions = () => {
       subscriptionPlan: "Premium",
       from: "10/21/2024",
       to: "04/21/2025",
-      amountPaid:"$2500.00",
       paymentMethod: "Credit Card",
       status: "Active",
       action: (
@@ -234,7 +229,6 @@ const Subscriptions = () => {
     subscriptionPlan: "Subscription Plan",
     from: "From",
     to: "To",
-    amountPaid:"Amount Paid",
     paymentMethod: "Payment Method",
     status: "Status",
     action: "Actions",

@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import { Checkbox, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useHistory, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const InputStyled = styled(TextField)`
   & .MuiOutlinedInput-root {
@@ -188,6 +189,7 @@ const LoginPage = () => {
                     <p className={Styles.LoginPageInputContainerText}>Forgot Password ?</p>
             </div>
             <button className={Styles.LoginButton} onClick={()=> handleLoginUser()}>Login</button>
+            <Link to="/master_admin" className="" style={{color:"#fff", textAlign:"center", marginTop:"20px"}}>Super Admin</Link>
         </div>
         <div className={Styles.LoginContentCartTwo}>
           <img

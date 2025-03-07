@@ -15,11 +15,12 @@ const HeaderPage = () => {
       <div className={Styles.HeaderPageNavContainer}>
         <div className={Styles.HeaderPageNavContainerLeft}>
           <img src={HeaderImage} alt="logo" className={Styles.HeaderPageLogo} />
-          <img src={backarrowOne} alt="logo" />
-          <Link className="Link" to="/homepage"><p>Menu</p></Link>
+          <Link className="Link" to="/homepage">
+          <p><img src={backarrowOne} alt="logo" className={Styles.HeaderPageBackIcon} />
+          Menu</p></Link>
         </div>
         <div className={Styles.HeaderPageNavContainerRight}>
-          <div>
+          <div className={Styles.HeaderPagesearch}>
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search..."

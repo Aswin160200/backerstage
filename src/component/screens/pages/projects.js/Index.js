@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { CgOverflow } from "react-icons/cg";
 import { Height } from "@mui/icons-material";
+import { borderRadius } from "@mui/system";
 import cloneDeep from "lodash/cloneDeep";
 import throttle from "lodash/throttle";
 import Pagination from "rc-pagination";
@@ -28,36 +29,32 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 800,
-  height: "60vh",
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
   borderRadius: "10px",
-  overflowY: "scroll",
 };
 
 export const InputStyled = styled(TextField)`
   & .MuiOutlinedInput-root {
-    border-color: rgb(166, 167, 172);
+    border-color: #e1e1e1;
     color: rgb(13, 13, 14);
-    height: 46px;
     font-size: 14px;
 
     & fieldset {
-      border-color: rgb(166, 167, 172);
+      border-color: #e1e1e1;
     }
 
     &:hover fieldset {
-      border-color: rgb(166, 167, 172);
+      border-color: #e1e1e1;
     }
 
     &.Mui-focused fieldset {
-      border-color: rgb(166, 167, 172);
-      border: 1px solid rgb(166, 167, 172);
+      border-color: #e1e1e1;
+      border: 1px solid #e1e1e1;
     }
 
     &.Mui-active fieldset {
-      border-color: rgb(166, 167, 172);
+      border-color: #e1e1e1;
     }
   }
 `;
@@ -66,21 +63,27 @@ const ProjectsPage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
 
   // tabledata
   const allData = [
     {
-      name:  <Link to="/project_details" className="Link">ABC Project </Link>,
-      parentId: "12",
-      campaignType: "Push",
-      status: "Failed",
-      channel: "android",
+      No:  38 ,
+      projectname: "ABC Project",
+      status: "Actively Raising",      
+      startdate: "2/19/2025",
+      houseticket: "https://abc-pr.com",
+      billedname: "Robin Pattison",
+      totalraised: "$20,425", 
       action: (
         <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
+          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} onClick={handleOpenEdit}/>
+          <Link to="/project_details" className="Link">
           <RemoveRedEyeOutlinedIcon
             className={Styles.ProjectsTableActionViewIcon}
-          />
+          /></Link>
           <DeleteOutlineOutlinedIcon
             className={Styles.ProjectsTableActionDeleteIcon}
           />
@@ -88,17 +91,20 @@ const ProjectsPage = () => {
       ),
     },
     {
-      name: <Link to="/project_details" className="Link">ABCD Project </Link>,
-      parentId: "123",
-      campaignType: "Inapp",
-      status: "Failed",
-      channel: "iOS",
+      No:  38 ,
+      projectname: "ABC Project",
+      status: "Actively Raising",      
+      startdate: "2/19/2025",
+      houseticket: "https://abc-pr.com",
+      billedname: "Robin Pattison",
+      totalraised: "$20,425", 
       action: (
         <div className={Styles.projectTableActionContainer}>
-          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} />
+          <EditOutlinedIcon className={Styles.ProjectTableActionEditIcon} onClick={handleOpenEdit} />
+          <Link to="/project_details" className="Link">
           <RemoveRedEyeOutlinedIcon
             className={Styles.ProjectsTableActionViewIcon}
-          />
+          /></Link>
           <DeleteOutlineOutlinedIcon
             className={Styles.ProjectsTableActionDeleteIcon}
           />
@@ -108,11 +114,13 @@ const ProjectsPage = () => {
   ];
 
   const tableHead = {
-    name:"Campaign Name",
-    parentId: "Campaign Id",
-    campaignType: "Type",
+    No:"No.",
+    projectname: "Project Name",
     status: "Status",
-    channel: "Channel",
+    startdate: "Start Date",
+    houseticket: "House Ticket",
+    billedname: "Billed Name",
+    totalraised: "Total Raised",  
     action: "Actions",
   };
   const countPerPage = 5;
@@ -166,7 +174,7 @@ const ProjectsPage = () => {
 
   const headRow = () => {
     return Object.values(tableHead).map((title, index) => (
-      <td key={index}>{title}</td>
+      <th key={index}>{title}</th>
     ));
   };
 
@@ -199,7 +207,7 @@ const ProjectsPage = () => {
           </div>
         </div>
         <div className={Styles.ProjectsPageTabsContainerTable}>
-          <div class="search">
+          <div className={Styles.Search}>
             <input
               placeholder="Search Campaign"
               value={value}
@@ -228,7 +236,7 @@ const ProjectsPage = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box className="modal">
             <div className={Styles.ProjectsPageModelPopupContainer}>
               <div className={Styles.ProjectsPageModelPopupHeader}>
                 <p className={Styles.ProjectsPageModelPopupHeaderText}>
@@ -239,6 +247,7 @@ const ProjectsPage = () => {
                   className={Styles.ProjectsPageModelPopupHeaderTextIcon}
                 />
               </div>
+              <div className={Styles.ProjectsPageModelPopupbody}>
               <div className={Styles.CreateProjetsTitleContainer}>
                 <p className={Styles.CreateProjetsTitle}>
                   Projects Information
@@ -261,26 +270,7 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
               <span className={Styles.registerErrormsg}>{error?.username}</span>
             )} */}
-                  </div>
-                  <div className={Styles.CreateProjcetsInputCart}>
-                    <p className={Styles.CreateProjectsInputCartText}>
-                      Project summary
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="lastname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-              <span className={Styles.registerErrormsg}>{error?.username}</span>
-            )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjectsInputContent}>
-                  <div className={Styles.CreateProjcetsInputCart}>
+           
                     <p className={Styles.CreateProjectsInputCartText}>
                       Status
                     </p>
@@ -295,17 +285,28 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                
-                </div>
-                <div className={Styles.CreateProjectsInputContent}>
-                  <div className={Styles.CreateProjcetsInputCart}>
-                    <p className={Styles.CreateProjectsInputCartText}>
+                  <p className={Styles.CreateProjectsInputCartText}>
                      Start Date
                     </p>
 
                     <InputStyled
                       id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                    Upload OA & Subscription Documents as one file
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"  
+                      type="file"                    
                       className={Styles.LoginPageInputContainerInput}
                       inputProps={{ maxLength: 20 }}
                       name="firstname"
@@ -317,11 +318,29 @@ const ProjectsPage = () => {
                   </div>
                   <div className={Styles.CreateProjcetsInputCart}>
                     <p className={Styles.CreateProjectsInputCartText}>
+                      Project summary
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
                       Deadline
                     </p>
 
                     <InputStyled
                       id="outlined-basic"
+                      type="date"
                       className={Styles.LoginPageInputContainerInput}
                       inputProps={{ maxLength: 20 }}
                       name="lastname"
@@ -330,28 +349,12 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
+            
                   </div>
-                
                 </div>
-                <div className={Styles.CreateProjectsInputContent}>
-                  <div className={Styles.CreateProjcetsInputCart}>
-                    <p className={Styles.CreateProjectsInputCartText}>
-                    Upload OA & Subscription Documents as one file
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
                 
-                </div>
+                
+               
                 <div className={Styles.CreateProjetsTitleContainer}>
                 <p className={Styles.CreateProjetsTitle}>
                   Projects Details
@@ -373,6 +376,50 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Total Allocation 
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      House Ticket Link
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                    General Comments
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
                   </div>
                   <div className={Styles.CreateProjcetsInputCart}>
                     <p className={Styles.CreateProjectsInputCartText}>
@@ -389,26 +436,6 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjectsInputContent}>
-                  <div className={Styles.CreateProjcetsInputCart}>
-                    <p className={Styles.CreateProjectsInputCartText}>
-                      Total Allocation 
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="firstname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                  <div className={Styles.CreateProjcetsInputCart}>
                     <p className={Styles.CreateProjectsInputCartText}>
                       Total Raised
                     </p>
@@ -423,10 +450,200 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                    House Ticket Comments
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
                   </div>
                 </div>
+                
+               
+              
+              </div>
+              </div>
+              <div className={Styles.CreateProjectsButtonContainer}>
+              <button className={Styles.CreateProjectsCancelButton} onClick={()=>handleClose()}>
+                Cancel
+              </button>
+              <button className={Styles.CreateProjectsSubmitButton} onClick={()=>handleClose()}>
+                Save
+              </button>
+            </div>
+            </div>
+          </Box>
+        </Modal>
+        <Modal
+          open={openEdit}
+          onClose={handleCloseEdit}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+          <div className={Styles.ProjectsPageModelPopupContainer}>
+              <div className={Styles.ProjectsPageModelPopupHeader}>
+                <p className={Styles.ProjectsPageModelPopupHeaderText}>
+                  Edit Projects
+                </p>
+                <CloseOutlinedIcon
+                  onClick={() => handleCloseEdit()}
+                  className={Styles.ProjectsPageModelPopupHeaderTextIcon}
+                />
+              </div>
+              <div className={Styles.ProjectsPageModelPopupbody}>
+              <div className={Styles.CreateProjetsTitleContainer}>
+                <p className={Styles.CreateProjetsTitle}>
+                  Projects Information
+                </p>
+              </div>
+              <div className={Styles.CreateProjectsInputContainer}>
                 <div className={Styles.CreateProjectsInputContent}>
                   <div className={Styles.CreateProjcetsInputCart}>
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Project Name
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+           
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Status
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                  <p className={Styles.CreateProjectsInputCartText}>
+                     Start Date
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                    Upload OA & Subscription Documents as one file
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="file"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                  </div>
+                  <div className={Styles.CreateProjcetsInputCart}>
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Project summary
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+              <span className={Styles.registerErrormsg}>{error?.username}</span>
+            )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Deadline
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      type="date"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="lastname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+            
+                  </div>
+                </div>
+                
+                
+               
+                <div className={Styles.CreateProjetsTitleContainer}>
+                <p className={Styles.CreateProjetsTitle}>
+                  Projects Details
+                </p>
+              </div>
+              <div className={Styles.CreateProjectsInputContent}>
+                  <div className={Styles.CreateProjcetsInputCart}>
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Billed Name
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Total Allocation 
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="firstname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, firstname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
                     <p className={Styles.CreateProjectsInputCartText}>
                       House Ticket Link
                     </p>
@@ -441,26 +658,6 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
-                  </div>
-                  <div className={Styles.CreateProjcetsInputCart}>
-                    <p className={Styles.CreateProjectsInputCartText}>
-                    House Ticket Comments
-                    </p>
-
-                    <InputStyled
-                      id="outlined-basic"
-                      className={Styles.LoginPageInputContainerInput}
-                      inputProps={{ maxLength: 20 }}
-                      name="lastname"
-                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
-                    />
-                    {/* {error?.username && (
-                      <span className={Styles.registerErrormsg}>{error?.username}</span>
-                    )} */}
-                  </div>
-                </div>
-                <div className={Styles.CreateProjectsInputContent}>
-                  <div className={Styles.CreateProjcetsInputCart}>
                     <p className={Styles.CreateProjectsInputCartText}>
                     General Comments
                     </p>
@@ -468,6 +665,24 @@ const ProjectsPage = () => {
                     <InputStyled
                       id="outlined-basic"
                       className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                  </div>
+                  <div className={Styles.CreateProjcetsInputCart}>
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Total Capitalization
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
                       inputProps={{ maxLength: 20 }}
                       name="lastname"
                       // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
@@ -475,8 +690,42 @@ const ProjectsPage = () => {
                     {/* {error?.username && (
                       <span className={Styles.registerErrormsg}>{error?.username}</span>
                     )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                      Total Raised
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 20 }}
+                      name="lastname"
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
+                    <p className={Styles.CreateProjectsInputCartText}>
+                    House Ticket Comments
+                    </p>
+
+                    <InputStyled
+                      id="outlined-basic"
+                      className={Styles.LoginPageInputContainerInput}
+                      inputProps={{ maxLength: 200 }}
+                      name="lastname"
+                      multiline
+                      rows={4}
+                      // onChange={(e) => setCreateInvestor({ ...createInvestor, lastname: e.target.value })}
+                    />
+                    {/* {error?.username && (
+                      <span className={Styles.registerErrormsg}>{error?.username}</span>
+                    )} */}
                   </div>
                 </div>
+                
+               
+              
+              </div>
               </div>
               <div className={Styles.CreateProjectsButtonContainer}>
               <button className={Styles.CreateProjectsCancelButton} onClick={()=>handleClose()}>

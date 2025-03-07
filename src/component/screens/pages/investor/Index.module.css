@@ -86,28 +86,22 @@
     gap: 5px;
 }
 .ViewTableActionEditIcon{
-  width: 10%;
-  height: 10%;
-  color: var(--geenColor);
-  cursor: pointer;
-  background-color: var(--LightGray);
-  padding: 5px;
+    width: 10%;
+    height: 10%;
+    color: var(--geenColor);
+    cursor: pointer;
 }
 .ViewTableActionViewIcon{
-  width: 10%;
-  height: 10%;
-  color: var(--purpleColor);
-  cursor: pointer;
-  background-color: var(--LightGray);
-  padding: 5px;
+    width: 10%;
+    height: 10%;
+    color: var(--purpleColor);
+    cursor: pointer;
 }
 .ViewTableActionDeleteIcon{
-  width: 10%;
-  height: 10%;
-  color: var(--lightRed);
-  cursor: pointer;
-  background-color: var(--LightGray);
-  padding: 5px;
+    width: 10%;
+    height: 10%;
+    color: var(--lightRed);
+    cursor: pointer;
 }
 
 /* model  */
@@ -161,9 +155,8 @@
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items:center;
-    margin: 1rem 0rem;
   }
   .CreateInvestorCancelButton{
     padding: 0.5rem 1.5rem;
@@ -212,36 +205,5 @@
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
-
-  }
-  .CreateInvestorInputCartAccreditedt{
-    display: flex;
-    align-items: center;
-  }
-  .CreateInvestorInputCartAccreditedtText{
-    color: var(--darkColor);
-    font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_16);
-    font-weight: var(--font-weight_400);
-    letter-spacing: 0.3px;
-  }
-  .CreateInvestorTitleContainerHeader{
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid var(--ashColor);    
-
-  }
-  .CreateInvestorTitleContainerHeaderText{
-    font-family: var(--defaultFontFamily);
-    font-weight: var(--font-weight_600);
-    font-size: var(--font-size_24);
-    color: var(--darkColor);
-  }
-  .CreateInvestorTitleContainerFooter{
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid var(--ashColor);
-    margin-top: 1rem;
-    padding: 0.5rem;
 
   }

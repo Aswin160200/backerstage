@@ -24,13 +24,13 @@ const CoProducersTable=()=>{
         emailID: "robin@gmail.com",
         viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
         action: (
-        <div className={Styles.CoProducersTableActionContainer}>
-          <EditOutlinedIcon className={Styles.CoProducersTableActionEditIcon} />
+        <div className="TableActionContainer">
+          {/* <EditOutlinedIcon className="TableActionEditIcon" />
           <RemoveRedEyeOutlinedIcon
-            className={Styles.CoProducersTableActionViewIcon}
-          />
+            className="TableActionViewIcon"
+          /> */}
           <DeleteOutlineOutlinedIcon
-            className={Styles.CoProducersTableActionDeleteIcon}
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
@@ -41,31 +41,13 @@ const CoProducersTable=()=>{
         emailID: "robin@gmail.com",
         viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
         action: (
-        <div className={Styles.CoProducersTableActionContainer}>
-          <EditOutlinedIcon className={Styles.CoProducersTableActionEditIcon} />
+          <div className="TableActionContainer">
+          {/* <EditOutlinedIcon className="TableActionEditIcon" />
           <RemoveRedEyeOutlinedIcon
-            className={Styles.CoProducersTableActionViewIcon}
-          />
+            className="TableActionViewIcon"
+          /> */}
           <DeleteOutlineOutlinedIcon
-            className={Styles.CoProducersTableActionDeleteIcon}
-          />
-        </div>
-      ),
-    },
-
-    {
-        no:  "38",
-        name: "Robin Pattison",
-        emailID: "robin@gmail.com",
-        viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
-        action: (
-        <div className={Styles.CoProducersTableActionContainer}>
-          <EditOutlinedIcon className={Styles.CoProducersTableActionEditIcon} />
-          <RemoveRedEyeOutlinedIcon
-            className={Styles.CoProducersTableActionViewIcon}
-          />
-          <DeleteOutlineOutlinedIcon
-            className={Styles.CoProducersTableActionDeleteIcon}
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
@@ -77,13 +59,31 @@ const CoProducersTable=()=>{
         emailID: "robin@gmail.com",
         viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
         action: (
-        <div className={Styles.CoProducersTableActionContainer}>
-          <EditOutlinedIcon className={Styles.CoProducersTableActionEditIcon} />
+          <div className="TableActionContainer">
+          {/* <EditOutlinedIcon className="TableActionEditIcon" />
           <RemoveRedEyeOutlinedIcon
-            className={Styles.CoProducersTableActionViewIcon}
-          />
+            className="TableActionViewIcon"
+          /> */}
           <DeleteOutlineOutlinedIcon
-            className={Styles.CoProducersTableActionDeleteIcon}
+            className="TableActionDeleteIcon"
+          />
+        </div>
+      ),
+    },
+
+    {
+        no:  "38",
+        name: "Robin Pattison",
+        emailID: "robin@gmail.com",
+        viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
+        action: (
+          <div className="TableActionContainer">
+          {/* <EditOutlinedIcon className="TableActionEditIcon" />
+          <RemoveRedEyeOutlinedIcon
+            className="TableActionViewIcon"
+          /> */}
+          <DeleteOutlineOutlinedIcon
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
@@ -94,13 +94,13 @@ const CoProducersTable=()=>{
         emailID: "robin@gmail.com",
         viewInvestors: <Link to="" className={Styles.LinkAddress}>View</Link>,
         action: (
-        <div className={Styles.CoProducersTableActionContainer}>
-          <EditOutlinedIcon className={Styles.CoProducersTableActionEditIcon} />
+          <div className="TableActionContainer">
+          {/* <EditOutlinedIcon className="TableActionEditIcon" />
           <RemoveRedEyeOutlinedIcon
-            className={Styles.CoProducersTableActionViewIcon}
-          />
+            className="TableActionViewIcon"
+          /> */}
           <DeleteOutlineOutlinedIcon
-            className={Styles.CoProducersTableActionDeleteIcon}
+            className="TableActionDeleteIcon"
           />
         </div>
       ),
@@ -166,7 +166,7 @@ const CoProducersTable=()=>{
 
   const headRow = () => {
     return Object.values(tableHead).map((title, index) => (
-      <td key={index}>{title}</td>
+      <th key={index}>{title}</th>
     ));
   };
     return (

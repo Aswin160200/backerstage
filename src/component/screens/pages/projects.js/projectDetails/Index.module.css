@@ -213,34 +213,34 @@
     align-items: center;
 }
 .ProjectDetailsInvestorTableInvestorDocumentViewButton{
-    padding: 0.2rem 0.9rem;
+    padding: 0.3rem 0.9rem;
     margin: 0.3rem;
     border: 1px solid var(--darkBlue);
     background-color: var(--darkBlue);
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_12);
+    font-size: var(--font-size_14);
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
 }
 .ProjectDetailsInvestorTableInvestorDocumentUploadButton{
-    padding: 0.2rem 0.9rem;
+    padding: 0.3rem 0.9rem;
     margin: 0.3rem;
     border: 1px solid var(--DartPurpleColor);
     background-color: var(--DartPurpleColor);
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_12);
+    font-size: var(--font-size_14);
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
 }
 .ProjectDetailsInvestorTableInvestorDocumentGenerateButton{
-    padding: 0.2rem 0.9rem;
+    padding: 0.3rem 0.9rem;
     margin: 0.3rem;
     border: 1px solid var(--darkGreenColor);
     background-color: var(--darkGreenColor);
     font-family: var(--defaultFontFamily);
-    font-size: var(--font-size_12);
+    font-size: var(--font-size_14);
     font-weight: var(--font-weight_500);
     color: var(--whitecolor);
     cursor: pointer;
@@ -266,8 +266,7 @@
     cursor: pointer;
 }
 .CreateProjetsdetailsAddPartysProjectTitleContainer{
-    width: 90%;
-    padding: 1rem;
+   
 }
 .CreateProjetsdetailsAddPartysProjectTitle{
     font-family: var(--defaultFontFamily);
@@ -279,19 +278,19 @@
     display:flex;
     flex-wrap: wrap;
     align-items: center;
-    width: 90%;
+    margin-bottom: 20px;
 }
 .CreateProjetsdetailsAddPartysInputContent{
     display: flex;
     justify-content: center;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
+    gap:20px;
 }
 .CreateProjetsdetailsAddPartysInputCart{
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 50%;
 }
 .CreateProjetsdetailsAddPartysInputCartText{
     color: var(--darkColor);
@@ -415,6 +414,9 @@
     font-size: var(--font-size_16);
     font-weight: var(--font-weight_600);
     color: var(--lightBlueColor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .ProjectDetailsPartiesContent{
     display: flex;
@@ -438,4 +440,8 @@
     font-size: var(--font-size_16);
     font-weight: var(--font-weight_600);
     color: var(--darkColor);
+}
+.MuiPaper-root
+{
+  box-shadow: none;
 }
