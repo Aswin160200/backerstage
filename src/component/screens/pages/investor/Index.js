@@ -261,6 +261,35 @@ const InvestorPage = () => {
       <td key={index}>{title}</td>
     ));
 
+
+    const [role, setRole] = useState("1");
+
+    const handleChangeRole = (event) => {
+      setRole(event.target.value);
+    };
+
+    const [selectedStatus, setSelectedStatus] = useState(""); // For status filter
+    const [selectedState, setSelectedState] = useState(""); // For state filter
+
+
+    const handleStatusChange = (event) => {
+      setSelectedStatus(event.target.value);
+    };
+    
+    const handleStateChange = (event) => {
+      setSelectedState(event.target.value);
+    };
+
+    const filteredData = allData.filter((item) => {
+      return (
+        (selectedStatus === "" || item.status === selectedStatus) &&
+        (selectedState === "" || item.state === selectedState)
+      );
+    });
+
+
+    
+
   return (
     <div className={Styles.InvestorPageMainContainer}>
       <HeaderPage />
