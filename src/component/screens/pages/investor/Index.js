@@ -360,9 +360,7 @@ const InvestorPage = () => {
       );
     });
 
-    // useEffect(() => {
-    //   updatePage(1);
-    // }, [filteredData]);
+
     
 
   return (
